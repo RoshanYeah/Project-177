@@ -1,0 +1,38 @@
+from flask import Flask, render_template,jsonify
+import random
+
+app = Flask(__name__)
+
+templates = [
+    {
+        "inputs": 5,
+        "category":"Sports",
+        "word":"Chess"
+    },
+    {
+        "inputs": 10,
+        "category":"Sports",
+        "word":"Volleyball"
+    },
+    {
+        "inputs": 5,
+        "category":"Subject",
+        "word":"Maths"
+    },
+    {
+        "inputs": 6,
+        "category":"European Country Name",
+        "word":"France"
+    },
+]
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/get-template")
+def get_template():
+    return jsonify({
+        "status":"success",
+        "word": random.choice(templates)
+    })
